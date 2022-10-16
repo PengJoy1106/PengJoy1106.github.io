@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors | 方寸之土</title><meta name="keywords" content="mete-learning,GPN"><meta name="author" content="方方土同学"><meta name="copyright" content="方方土同学"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Meta-Learining With Graph Neural Networks：Methods and ApplicationsAbstract图神经网络(GNNs)是一种基于图数据的深度神经网络，已被广泛应用于从药物发现到推荐系统等各个领域。然而，当可用样本很少时，此类应用程序上的gnn是有限的。元学习是解决机器学习中缺乏样本的一个重要框架，近年来，研究人员开始将元学习应用于gnn。在这项工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors">
+<meta property="og:url" content="http://pengjoy1106.github.io/2022/09/03/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%912/index.html">
+<meta property="og:site_name" content="方寸之土">
+<meta property="og:description" content="Meta-Learining With Graph Neural Networks：Methods and ApplicationsAbstract图神经网络(GNNs)是一种基于图数据的深度神经网络，已被广泛应用于从药物发现到推荐系统等各个领域。然而，当可用样本很少时，此类应用程序上的gnn是有限的。元学习是解决机器学习中缺乏样本的一个重要框架，近年来，研究人员开始将元学习应用于gnn。在这项工">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(13).jpg">
+<meta property="article:published_time" content="2022-09-03T07:30:00.000Z">
+<meta property="article:modified_time" content="2022-10-16T12:25:44.151Z">
+<meta property="article:author" content="方方土同学">
+<meta property="article:tag" content="mete-learning">
+<meta property="article:tag" content="GPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(13).jpg"><link rel="shortcut icon" href="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (8).jpg"><link rel="canonical" href="http://pengjoy1106.github.io/2022/09/03/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%912/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":"ture","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-16 20:25:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><script src="/live2d-widget/autoload.js"></script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (24).jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-file-video"></i><span> 光影旅途</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">方寸之土</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-file-video"></i><span> 光影旅途</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="he-plugin-simple"></div></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-03T07:30:00.000Z" title="发表于 2022-09-03 15:30:00">2022-09-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-16T12:25:44.151Z" title="更新于 2022-10-16 20:25:44">2022-10-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>29分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Meta-Learining-With-Graph-Neural-Networks：Methods-and-Applications"><a href="#Meta-Learining-With-Graph-Neural-Networks：Methods-and-Applications" class="headerlink" title="Meta-Learining With Graph Neural Networks：Methods and Applications"></a>Meta-Learining With Graph Neural Networks：Methods and Applications</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>图神经网络(GNNs)是一种基于图数据的深度神经网络，已被广泛应用于从药物发现到推荐系统等各个领域。然而，当可用样本很少时，此类应用程序上的gnn是有限的。元学习是解决机器学习中缺乏样本的一个重要框架，近年来，研究人员开始将元学习应用于gnn。在这项工作中，我们提供了一个全面的调查不同的元学习方法涉及gnn在各种图问题上，展示了这两种方法一起使用的力量。我们根据提出的架构、共享表示和应用程序对文献进行分类。最后，我们讨论了几个令人振奋的未来研究方向和有待解决的问题。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>人工智能(AI)和机器学习的方法在各种应用中都取得了巨大的成功，从自然语言处理[Dev+19]到癌症筛查[Wu+19]。人工智能系统的成功可以归因于各种架构创新，以及深度神经网络(DNN)从欧几里得数据(如图像、视频等)提取有意义的表示的能力。然而，在许多应用程序中，数据是图结构的。例如，在药物发现中，目标是预测给定的分子是否为新药的潜在候选分子，其中输入的分子用图形表示。在推荐系统中，用户和商品之间的交互是用图形表示的，而这种非欧几里得数据对于设计一个更好的系统至关重要。</p>
+<p>图结构数据在各种应用中的激增导致了图神经网络(gnn)，它是DNN在图结构输入中的推广。gnn的主要目标是学习图的有效表示。这种表示将顶点、边和&#x2F;或图映射到一个低维空间，因此图中的结构关系通过表示中的几何关系反映出来[HYL17b]。近年来，gnn被应用于不同的领域，经常有令人惊讶的积极结果，如发现一种新的抗生素[Sto+20]，准确的交通预测[Cui+19]等。</p>
+<p>尽管最近GNN在各个领域都取得了成功，但GNN框架也有其不足之处。应用gnn的主要挑战之一，特别是对于大型图结构数据集，是样本数量有限。此外，像推荐系统这样的真实系统通常需要处理不同类型的问题，并且必须在很少观察到的情况下适应新问题。近年来，元学习被证明是解决深度学习系统这些缺点的一个重要框架。元学习背后的主要思想是设计可以利用之前的学习经验快速适应新问题的学习算法，并在很少的样本中学习有用的算法。这种方法在各种应用中都非常成功，如自然语言处理[Liu+19]、机器人[Nag+20]和医疗[cha +19]。</p>
+<p>近年来，针对不同的应用提出了多种训练gnn的元学习方法。将元学习应用于图结构数据有两个主要的挑战。首先，一个重要的挑战是确定不同任务共享的表示类型。由于gnn用于从节点分类到图分类的广泛任务，学习到的共享表示需要考虑要解决的任务类型，这使得元学习的体系结构选择和设计非常重要。第二，在多任务设置中，我们通常从每个任务中获得很少的样本。因此，就相似性而言，支持和查询示例的重叠通常有限。例如，在节点分类任务中，节点对给定任务的支持和查询集很少相似。另一方面，在链接预测中，支持边和查询边在图中往往相距较远。因此，将元学习应用于gnn的一个主要挑战是对图中相距很远(包括距离和相似性)的节点(或边)之间的依赖关系建模。在这项调查中，我们回顾了不断增长的文献与gnn的元学习。对gnn [Zho+18;Wu+20]和元学习[Hos+20]，但我们认为这是第一次对现有的gnn元学习文献进行分类和全面回顾。</p>
+<h3 id="1-1-我们的贡献"><a href="#1-1-我们的贡献" class="headerlink" title="1.1 我们的贡献"></a>1.1 我们的贡献</h3><p>除了提供基于gnn的元学习和架构的背景知识外，我们的主要贡献可以总结如下。</p>
+<ul>
+<li><p>综合回顾:我们提供了一个综合回顾的元学习技术与gnn的几个图问题。我们根据方法、表示和应用对文献进行分类，并展示了通过元学习解决gnn局限性的各种场景。</p>
+</li>
+<li><p>未来方向:我们讨论了元学习和gnn如何解决几个领域的一些挑战:<br>(i)组合图问题，<br>(ii)图挖掘问题，<br>(iii)其他新兴应用，如交通流预测，分子特性预测和网络对齐。</p>
+</li>
+</ul>
+<p>本文的其余部分组织如下。第2节提供了几个关键图神经网络架构的背景。第三部分概述了元学习的背景和主要理论进展。第4节和第5节描述了在重要图相关问题上使用带有gnn的元学习框架的论文的综合分类。首先，第4节涵盖了元学习框架在解决一些经典图问题中的应用。这里讨论的问题并不是明确提出多任务设置，而是将元学习框架应用于固定图。在第5节中，我们介绍了图元学习的相关文献，当有多个任务时，图可能会随着任务的变化而变化。虽然已经提出了各种各样的gnn用于图元学习，但它们可以根据共享表示的类型进行广泛的分类，这可以是在局部级别(基于节点&#x2F;边缘)或在全局级别(基于图)。表1提供了按共享表示和应用程序域类型分类的各种论文的概述。表2给出了第5节中基于相应元学习方法所描述的论文。第6节涵盖了gnn上元学习的广泛应用，第7节提出了一些令人兴奋的未来方向。</p>
+<h2 id="2-图神经网络"><a href="#2-图神经网络" class="headerlink" title="2 图神经网络"></a>2 图神经网络</h2><p>在图上推广深度学习已经成为图神经网络(GNNs)的一个令人兴奋的领域。gnn利用来自节点邻域和节点本身的结构和属性信息，将节点嵌入或表示为向量空间中的点。它们通过非线性转换和聚合函数将这些信息编码成最终的表示。提出的架构可以大致分为两类:(i)邻域卷积，(ii)位置感知。</p>
+<p>(i)邻域卷积:基于邻域卷积的架构的主要例子包括GCN [KW17]、GRAPHSAGE [HYL17a]和GAT [Vel+18]。这些架构主要通过对其邻域的卷积操作来创建节点的表示，即嵌入，zv,G &#x3D; NGk (v)</p>
+<p>其中，图G中节点v的(k-hop)邻域(节点集)为NGk (v)。因此，邻域相似的两个节点可能具有相似的嵌入。</p>
+<p>(ii)位置感知:位置感知框架的gnn示例包括PGNN [YYL19]和GRAPHREACH [Nis+21]。在这种方法中，如果图中两个节点的位置接近(通常是通过跳数)，那么它们应该具有相似的嵌入。如果图具有较高的聚类系数，那么一个节点的单跳邻居之间也会共享许多其他的邻居。因此，如果两个节点距离很近，它们就很有可能存在相似的邻域。许多实图具有小世界和无标度特性，聚类系数高。接下来，我们将简要介绍gnn的关键架构。</p>
+<p>GCN [KW17]: [KW17]通过引入图卷积网络(GCNs)，在图上应用神经架构方面做出了主要贡献。GCNs是图上卷积神经网络(CNNs)的类似版本。图卷积的灵感来自于用来自其附近像素的信息来表示一个像素(cnn中的过滤器)，它还应用了从节点的局部邻域聚合特征信息的关键思想。更正式地说，GCNs是产生d维嵌入的神经网络架构</p>
+<p>每个节点通过取邻接矩阵A和节点特征X作为输入;GCN(A, X): Rn×n × Rn×p→Rn×d。其思想是从一个节点的邻域(可以泛化为多个跃点)和它自己的特征中聚合特征信息，以产生最终的嵌入。一个2层(邻居为2跳)的GCN可以定义如下:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903160128.png"></p>
+<p>GRAPHSAGE [HYL17a]: Hamilton等人[HYL17a]提出了一个归纳框架，该框架具有一个聚合函数，能够跨节点共享权重参数(Wk)，可以推广到不可见的节点，并扩展到大型数据集。为了学习节点v的表示hvk，它遍历所有在其K-hop邻域内的节点。当在节点v上迭代时，它聚合(使用AGGREGATEk) v的邻居的当前表示(hk (v))</p>
+<p>GAT [Vel+18]:图注意网络(GATs) [Vel+18]使用注意机制学习边缘权值。与GRAPHSAGE [HYL17a]不同，GAT不假设相邻节点的贡献都相等。GAT学习两个连接节点之间的相对重要性&#x2F;权重。图卷积运算(第k次迭代)定义如下:</p>
+<p>其中αv,u衡量节点v与其邻居u∈N(v)之间的强度。GAT在基准数据集中的转换和归纳设置的节点分类任务中表现优于GCN和GRAPHSAGE。</p>
+<p>PGNN [YYL19]:与GRAPHSAGE不同，在GRAPHSAGE中，节点的表示依赖于它的k-hop邻域，PGNN遵循不同的范式，旨在合并一个节点相对于整个网络中的节点的位置信息。其核心思想是，通过量化节点与一组锚节点之间的距离，通过低失真嵌入来获取节点的位置。该框架首先对多组锚节点进行采样。它还学习了一种非线性的聚合方案来组合每个锚集中节点的特征。聚合通过节点与锚集之间的距离进行规范化。</p>
+<p>其他变体:基于不同机制，gnn还有其他几种变体和改进:门控注意网络(GAAN) [Zha+18]通过一种自我注意机制进一步扩展了GAT，该机制为每个注意头计算额外的注意分数。图Autoencoders [CLX16;KW16]将节点&#x2F;图编码到一个潜在的向量空间中，并根据应用程序以无监督的方式从这种编码中进一步重构图相关的数据;复发性卫星系统(进行Sca + 08年;Li+16]在节点上反复应用相同的一组参数来提取高级节点表示。关于gnn的全面调查，请参考[Wu+20]。</p>
+<h3 id="2-1-应用"><a href="#2-1-应用" class="headerlink" title="2.1 应用"></a>2.1 应用</h3><p>对于图上的半监督学习任务(如节点分类)，gnn优于传统方法。gnn的高层应用主要有三个方面:节点分类、链路预测和图分类。对于节点分类和链接预测任务，传统上使用四个基准数据集:Cora、Citeseer、Pubmed和蛋白质-蛋白质相互作用(PPI)数据集。Shchur等人[Shc+18]和Errica等人[Err+19]提供了关键架构在节点和图分类任务上性能的详细比较。在链接预测任务中也使用gnn，该任务在朋友或电影推荐、知识图补全、代谢网络重构等多个领域都有应用[ZC18]。</p>
+<h2 id="3-元学习的背景"><a href="#3-元学习的背景" class="headerlink" title="3 元学习的背景"></a>3 元学习的背景</h2><p>元学习已成为解决各种机器学习应用中数据有限问题的重要框架。元学习背后的主要思想是设计可以利用之前的学习经验快速适应新问题的学习算法，并在很少的样本中学习有用的算法[Sch87]。这种方法在各种应用中都非常成功，如自然语言处理[Liu+19]、机器人[Nag+20]和医疗[cha +19]。</p>
+<h3 id="3-1-框架"><a href="#3-1-框架" class="headerlink" title="3.1 框架"></a>3.1 框架</h3><p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903160644.png"></p>
+<h3 id="3-2-训练"><a href="#3-2-训练" class="headerlink" title="3.2 训练"></a>3.2 训练</h3><p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903160720.png"></p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903160746.png"></p>
+<h3 id="3-3-表示学习"><a href="#3-3-表示学习" class="headerlink" title="3.3 表示学习"></a>3.3 表示学习</h3><p>元学习的另一个视角是学习跨不同任务的共享表示，这对图神经网络的环境尤为重要。这里我们假设，给定一个输入x，从第t项任务的训练数据产生为yt &#x3D; ft◦h(x) + ηt，其中ηt是一些iid噪声。函数h将输入x映射到一个共享表示，然后应用一个特定于任务的函数ft来生成特定于任务的表示。</p>
+<p>在元训练阶段，我们尝试学习共享函数h。假设我们给定T个数据集Dt &#x3D;{(xti, yti}int&#x3D;1，当t &#x3D; 1时，…, T。然后我们求解下面的优化问题来恢复h。</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903161022.png"></p>
+<p>我们现在实例化这个框架，用于对图的节点进行分类。与之前一样，我们使用两层GCN，其中模型定义在公式(2)中。然而，我们现在假设第一层跨不同的任务共享，只有第二层为新任务进行训练。特别地，我们假设Wt &#x3D; [W;Wt(2)]。虽然，式(3)中的优化问题是NP-hard解决这种特殊类型的表示，我们可以写下一个算法来解决元参数W使用梯度下降。算法2描述了这个算法，并返回元参数W。</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903161423.png"></p>
+<h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><p>尽管取得了巨大的成功，但我们还没有完全理解元学习算法的理论基础。Baxter [Bax00]首先证明了多任务学习问题的泛化界，通过考虑一个从生成式模型中采样具有共享表示的任务的模型。Pontil等人[PM13]和Maurer等人[MPRP16]开发了基于统一收敛的通用框架来分析多任务表示学习。然而，他们假设甲骨文获得了一个全球经验风险最小化。最近，从表征学习来理解元学习已经有了一些很有希望的尝试。主要思想是任务共享一个公共的共享表示和一个特定于任务的表示[TJJ20b;TJJ20a;杜+ 20)。如果从训练任务中学习到共享表示，那么只需要几个样本就可以学习到新任务的特定任务表示。最后，最近有一些有趣的研究试图理解基于梯度的元学习。[Fin+19; BKT19; KBT19; Den+19]在在线凸优化(OCO)框架下分析了基于梯度的元学习。它们假设任务的参数接近于OCO框架中绑定后悔的共享参数。</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903161619.png"></p>
+<p>表1:基于应用和底层图相关表示的元学习和gnn论文的组织。框架(方法)的缩写如下。GPN:图原型网络，MetaR:元关系学习，GEN:图外推网络，RALE:相对和绝对位置em -床上，am - gnn:属性匹配元学习图神经网络，SAME:单任务适应多任务嵌入，SELAR:自监督辅助学习，GFL:图少镜头学习，GDN:图偏差网络，MI-GNN:图神经网络元归纳框架，AS-MAML:自适应步骤模型不确定元学习。</p>
+<h2 id="4-关于固定图的元学习"><a href="#4-关于固定图的元学习" class="headerlink" title="4 关于固定图的元学习"></a>4 关于固定图的元学习</h2><p>在本节中，我们回顾了元学习在解决图上一些经典问题中的应用。这里我们考虑当底层图是固定的，节点&#x2F;边缘特征不随不同任务而改变时的设置。事实上，我们并不是在一个多任务框架中，在这个框架中有很多任务，每个任务中只有很少的示例。相反，元学习的框架被应用于各种图问题，通过创建多个任务，要么考虑节点，要么考虑边。</p>
+<h3 id="4-1节点嵌入"><a href="#4-1节点嵌入" class="headerlink" title="4.1节点嵌入"></a>4.1节点嵌入</h3><p>节点嵌入的目标是学习图中节点的表示，这样任何下游应用程序都可以直接使用这些表示，而不需要考虑原始图。这个问题在实际应用中常常具有挑战性，因为大多数图的度分布都遵循幂律分布，且节点很多，连接很少。Liu等人[Liu+20]通过将元学习应用于图的节点嵌入问题来解决这个问题。他们建立了一个具有公共先验的回归问题来学习节点嵌入。由于高阶节点的基本表示是准确的，所以将它们作为元训练集来学习公共先验。低阶节点只有少数几个邻居(样本)，学习它们表示的回归问题被表述为元测试问题，公共先验采用少量样本学习此类节点的嵌入。</p>
+<h3 id="4-2节点分类"><a href="#4-2节点分类" class="headerlink" title="4.2节点分类"></a>4.2节点分类</h3><p>节点分类任务的目的是推断给定部分标记图中节点的缺失标签。这个问题经常出现在文档分类和蛋白质分类等不同的环境中[Tan+08;Bor+05]，近年来受到了极大的关注。然而，通常许多类是新颖的，即它们有少量标记节点。这使得元学习或少镜头学习特别适合这个问题。</p>
+<p>Zhou等人[Zhou +19]已经将元学习框架应用于图上的节点分类问题，通过使用来自有许多标记示例的类的数据学习可转移表示。然后，在元测试阶段，这个共享表示用于对带有少量标记样本的新类进行预测。Ding等人[Din+20]改进了之前的方法，考虑了每个类的原型表示，并将原型表示作为每个类加权表示的平均值进行元学习。Lan等人[Lan+20]通过元学习解决了同样的问题，但在不同的设置中，节点没有属性。他们的方法只使用图结构来获得任务节点的潜在表示。随后，Liu等人[Liu+21]指出，学习任务中节点之间的依赖关系也很重要，并建议使用中心性得分高的节点(或hub节点)来更新GNN学习到的表示。这是通过选择一个小型集线器节点集，并对每个节点v，考虑从集线器节点集到节点v的所有路径来实现的。它有助于对图中的绝对位置进行编码。与这些发展并行的是，Yao等人[Yao+20]考虑了一种基于度量学习的方法，其中节点的标签被预测为可转移度量空间中最近的类原型。他们首先使用GNN学习特定于类的表示，然后使用层次图表示学习特定于任务的表示。</p>
+<p>最后，在不同任务支持集中存在噪声或不准确标签的情况下，也使用了少镜头节点分类任务。Ding等人[Din+21b]提出了一种方法(Graph Hallucination Network)，通过从一个类中提取指定数量的样本来创建一个集合。然后，该方法学习对集合中每个节点的标签的准确性产生一个置信度得分。通过使用这些权重&#x2F;分数，最终生成更清晰(即，噪声更小)的节点表示。算法的其余部分遵循标准的MAML框架。</p>
+<h3 id="4-3-链接预测"><a href="#4-3-链接预测" class="headerlink" title="4.3 链接预测"></a>4.3 链接预测</h3><p>链路预测问题的目标是识别将形成或不形成链路的节点对。元学习已经被证明可以通过边&#x2F;链接学习新的关系，特别是在多关系图中。</p>
+<p>在多关系图中，一条边由三个端点和一个关系表示。这样的图形出现在许多重要的领域，如药物-药物相互作用预测。在多关系图中，链接预测的目标是在给定关系r的一个端点的情况下，通过观察r周围的几个三元组来预测新的三元组。这是一个具有挑战性的问题，因为通常只有少数几个三元组可用。Chen等[Che+19]用元学习分两步解决链路预测问题。首先，他们设计了一个关系元学习者，它学习跨多个关系的共享结构。这样的元学习者从支持集中的正面和反面嵌入产生关系元。其次，它们使用嵌入学习器，通过端点的嵌入和关系元计算支持集中三元组的真值。</p>
+<p>随着时间的推移，多关系图由于其动态特性(添加新节点)而更难管理，而当这些新进化的节点之间只有很少的链接时，学习就更加困难了。Baek等人[BLH20]介绍了一种少镜头的图外链接预测技术，他们预测了可见节点和未见节点之间以及未见节点之间的链接。其主要思想是将给定图中的实体随机分成模拟不可见实体的元训练集和真实不可见实体的元测试集。</p>
+<p>最后，Hwang等人[Hwa+21]通过结合元学习的自我监督辅助学习框架，展示了图神经网络对下游任务(如节点分类和链接预测)的有效性。辅助任务如元路径预测不需要标签，因此该方法成为自我监督的方法。在元学习框架中，使用各种辅助任务来提高底层主任务(如链路预测)的泛化性能。该方法有效地组合了辅助任务，并自动平衡它们，提高了主要任务的性能。该方法还可以灵活地处理任何图形神经网络结构，而无需额外的数据。</p>
+<h2 id="5-图神经网络的元学习"><a href="#5-图神经网络的元学习" class="headerlink" title="5 图神经网络的元学习"></a>5 图神经网络的元学习</h2><p>我们现在讨论的是关于图元学习的日益增长和令人兴奋的文献，其中有多个任务，底层图可以在任务之间改变。当节点&#x2F;边缘特征发生变化，或者底层网络结构随着任务发生变化时，图就会发生变化。在元学习的背景下，近年来提出了几种架构。然而，它们底层的公共线程是图的共享表示，可以是本地节点&#x2F;边级别的，也可以是全局图级别的。基于共享表现的类型，我们将现有作品分为两类。现有文献大多采用MAML算法[FAL17]对提出的gnn进行训练。MAML的外层循环更新共享参数，而内层循环更新当前任务的特定于任务的参数。表2列出了本节中所有论文的共享参数和特定于任务的参数。</p>
+<h3 id="5-1节点-x2F-边缘级共享表示"><a href="#5-1节点-x2F-边缘级共享表示" class="headerlink" title="5.1节点&#x2F;边缘级共享表示"></a>5.1节点&#x2F;边缘级共享表示</h3><p>首先，我们考虑本地共享表示的设置，即基于节点或基于边。Huang等人[HZ20]考虑了节点分类问题，即不同任务的输入图和标签可能不同。他们分两步学习每个结点u的表示。首先，该方法提取节点集{v: d(u, v)≤h}对应的子图Su，其中d(u, v)是节点u和v之间最短路径的距离，然后通过GCN给子图Su学习节点u的表示。考虑图Su的理论动机是节点v对u的影响随着它们之间的最短路径距离的增加而指数下降。一旦对节点进行编码，就可以学习到将编码映射到类标签的任何函数fθ。Huang等人[HZ20]使用MAML在一个新任务上用很少的样本学习这个函数，享受了节点分类中节点级共享表示的好处。</p>
+<p>Wang等[Wan+20]也考虑了网络结构固定，但节点特征随任务变化的节点分类问题。特别是给定一个带有节点特征矩阵的基图</p>
+<p>X∈Rn×d，提出的模型学习第t个任务的新特征矩阵Xt &#x3D; Xαt(φ) + βt(φ)，然后使用GNN fθ(Xt)学习第t个任务的节点表示。训练时，外环更新φ参数，而MAML内环只更新θ-参数。这样可以快速适应新任务。</p>
+<p>Wen等人[WFL21]研究了归纳设置下的节点分类问题，其中测试和训练中的图实例不重叠。他们的方法包括使用多层感知器(MLP)在给出一个图(即它的表示)之前计算一个任务。这些表示对于图级适配非常有用。他们在他们的方法中使用了传统的MAML范式来进行任务级适应。</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220903162433.png"></p>
+<h3 id="5-2-图级共享表示"><a href="#5-2-图级共享表示" class="headerlink" title="5.2 图级共享表示"></a>5.2 图级共享表示</h3><p>在本小节中，我们讨论了全局共享表示即图级共享表示时的设置。这种表示的一个典型应用是图分类问题，其目标是将给定的图分类为许多可能的类中的一个。从生物信息学到社会网络分析，很多应用中都出现了这个问题[YV15]。然而，在很多情况下，用于特定任务的样本&#x2F;图的数量很少，图分类任务往往需要大量的样本来进行高质量的预测。这些挑战可以通过元学习来解决。现有的使用元学习进行图分类的论文通常学习底层的共享表示，并将其用于新任务。</p>
+<p>Chauhan等人[CNK20]提出了基于图谱测度的少镜头图分类任务。特别是，他们训练一个特征提取器Fθ(·)来从元训练中的图中提取特征。在分类方面，他们首先使用单位Csup来预测一个图的超类概率，该图是一个丰富基类标签的聚类。然后他们使用Catt，一个注意力网络来预测实际的阶级标签。在元测试阶段，固定网络Fθ(·)和Csup的权重，并在新的测试类上对网络Catt进行再训练。由于特征提取器Fθ是公共共享结构，且不需要在测试任务上进行再训练，因此该方法对新类的样本要求很少。</p>
+<p>尽管Chauhan等人[CNK20]提出了一种新颖的图分类元学习体系结构，但存在一些局限性。首先，该体系结构假设测试的超类结构和训练集之间存在显著的重叠。其次，固定特征提取器无法针对新任务进行更新。Ma等人[Ma+20]设计了一种更好的元学习技术，允许特征提取器有效地适应新任务。他们使用两个网络-嵌入层(θe)，然后是分类层(θc)来对给定的图进行分类。但是，对于一个新任务，θe和θc都被更新。特别是，作者使用MAML [FAL17]来更新参数，并使用基于强化学习的控制器来确定内环是如何运行的，即，什么是一个新任务的最佳适应步骤。利用图的嵌入质量和元学习者的训练状态更新控制器的参数。</p>
+<p>Jiang等人[Jia+21]通过一种不同于mml的元学习中的度量学习方法[Wan+19]解决了少镜头图分类问题。在训练阶段，我们的想法是获得支持集中每个类中实例的平均表示。查询的预测是基于最近的邻居。</p>
+<p>这里的图表示是通过图同构网络(GIN)模型得到的。为了获取图的全局结构，他们在最终的聚合方案中对不同的GIN层使用不同的权值。为了对决定图标签的关键局部结构进行编码，本文嵌入了子图，并包含了它们具有不同注意权值的表示。</p>
+<p>最后，Buffelli等人[BV20]试图开发一个可以适应三种不同任务的框架——图分类、节点分类和链路预测。像[CNK20;Ma+20]它们使用两个不同的层;一个是生成节点嵌入并将图形转换为表示，另一个是用于三种类型任务的多头输出层。在mml初始化阶段训练节点嵌入层，并根据任务类型在mml内环中更新多头输出层。</p>
+<p>Bose等人[Bos+19]考虑了少镜头链接预测问题，其目标是预测仅包含其真实标签的一小部分链接&#x2F;边的标签。他们假设图是由一个公共分布p(·)生成的，并学习了一个可以快速适应新的图G ~ p(·)的元链接预测模型。特别地，作者使用变分图自动编码器(VGAE) [KW16]来建模基本链路预测模型。有两组参数:VGAE的全局初始化参数和本地图签名sG &#x3D; (G)，该签名是通过GCN传递图G，然后使用k层MLP获得的。训练是使用mml完成的，并且只更新测试图的图签名。</p>
+<h2 id="6-其他应用程序"><a href="#6-其他应用程序" class="headerlink" title="6 其他应用程序"></a>6 其他应用程序</h2><p>我们讨论了带有gnn的元学习在节点分类、链路预测和图分类方面的应用。事实上，这个框架是相当普遍的，可以应用于许多其他相关的重要问题。</p>
+<p>异常检测:异常检测的问题往往是由于标签的稀缺，为异常获取标签通常是劳动密集型的。Ding等[Din+21a]研究了标签稀缺时的异常检测，不同的任务涉及不同的图。该方法利用传统的gnn结构嵌入节点，并在得到嵌入后再增加一层来预测异常评分。最后利用传统的mml框架部署元学习者。内部循环优化特定任务的参数，例如graph。外环优化所有图的通用参数。</p>
+<p>网络对齐(Network Alignment, NA):网络对齐的目的是映射或链接来自不同网络的实体，并在许多应用领域相关，如跨域推荐和广告。Zhou等人[Zhou +20]通过元学习解决了这个对齐问题。如果两个不同的网络共享一些公共节点或锚点，那么这些网络是部分对齐网络。两个锚点之间的虚拟链接称为锚点链接。在NA中，给定一组网络和一些已知的锚节点(或链接)，目标是识别所有其他(未知的)潜在锚节点(或链接)。[Zho+20]的主要思想是将该问题框架为一枪分类问题，利用已知锚节点的元度量学习获得连接未知锚节点的潜在先验。</p>
+<p>流量预测:最近，流量预测问题[Pan+20]通过元学习得到了解决。在交通预测中，主要的挑战是对复杂的交通时空相关性进行建模，并获取这些相关性随位置变化的多样性。Pan等人[Pan+20]通过基于元学习的模型解决了这些挑战。他们的方法可以同时预测所有地点的交通状况。该框架由一个序列对序列的架构组成，该架构使用一个编码器来学习交通历史，并使用一个解码器来进行预测。对于编码器和解码器组件，使用图注意网络和递归神经网络的组合来分别建模不同的空间和时间相关性。</p>
+<h2 id="7-未来的发展方向"><a href="#7-未来的发展方向" class="headerlink" title="7 未来的发展方向"></a>7 未来的发展方向</h2><p>在图形特定应用中使用gnn进行元学习的应用是一个不断增长和令人兴奋的研究领域。在本节中，我们提出了几个未来的研究方向。</p>
+<h3 id="7-1-图上的组合优化问题"><a href="#7-1-图上的组合优化问题" class="headerlink" title="7.1 图上的组合优化问题"></a>7.1 图上的组合优化问题</h3><p>图中出现的组合优化问题在许多领域都有应用，如社交网络中的病毒营销[KKT03]，医疗[Wil+18]，基础设施开发[Med+18]，并提出了几种基于gnn的架构来解决这些问题[Dai+17;LCK18;气体+ 19;男人+ 20)。这些优化问题通常是np困难的，多项式时间算法，无论是否有近似保证，往往是可取的，并在实践中使用。然而，一些技术[LCK18;基于gnn的Man+20]需要在生成实际解集之前生成候选解节点&#x2F;边。请注意，这些问题的解决方案集中每个节点的重要性形式的标签通常很难得到。元学习可以在标签稀缺的情况下使用。此外，这些组合问题通常具有相似的结构。例如，影响最大化问题[KKT03]与最大覆盖问题有相似之处。然而，即使是执行贪心迭代算法来为影响最大化问题生成解&#x2F;标签，计算成本也很高。使用元学习来解决具有更少节点标签的更难的组合问题(看不见的任务)的想法将在更容易的问题(看不见的任务)上学习，在那里标签可以以更低的成本产生。最近，通过神经方法解决图上的组合优化问题获得了很多关注，我们建议读者参考[Cap+21]进行进一步阅读。</p>
+<h3 id="7-2-图挖掘问题"><a href="#7-2-图挖掘问题" class="headerlink" title="7.2 图挖掘问题"></a>7.2 图挖掘问题</h3><p>最近有人尝试用gnn来解决经典的图挖掘问题。例如，一个流行的问题是学习两个图之间的相似度，即找到两个图之间的图编辑距离(相似度)[Bai+19]。当相似度的概念改变，没有足够的数据来通过标准的监督学习方法学习时，元学习是否有帮助?另一个流行的图挖掘问题是检测两个输入图之间的最大公共子图(MCS)，应用于生物医学分析和恶意软件检测。在药物设计中，化合物中常见的子结构可以减少人体实验的次数。然而，MCS计算是np困难的，最先进的精确MCS求解器不能扩展到大型图。为MCS问题设计基于学习的模型[Bai+20]，同时利用尽可能少的标记MCS实例仍然是一项具有挑战性的任务，元学习可能有助于缓解这一挑战。</p>
+<h3 id="7-3-理论"><a href="#7-3-理论" class="headerlink" title="7.3 理论"></a>7.3 理论</h3><p>本文指出了基于gnn的元学习的几个重要理论问题。最自然的问题是了解在gnn中迁移学习的好处。Garg等人[GJJ20]和Scarselli等人[STH18]最近建立了gnn的泛化界。另一方面，在元学习的背景下，Tripu-raneni等人[TJJ20b]考虑了fj·h形式的函数，其中fj∈F是任务特定函数，h是共享函数。元测试阶段所需样本数量随C(F)增长，显著低于从头学习fj·h。如果能通过推广[GJJ20]和[STH18]的结果来证明gnn的类似加速结果，这将是很有趣的。另一个有趣的问题是确定共享表示的正确级别，并弄清楚这种结构的表达能力。Xu等人的开创性工作[Xu+18]证明了gnn的变种，如GCN和GraphSAGE并不比Weisfeiler-Lehman (WL)测试更具鉴别性。由于用于元学习的gnn进一步限制了所使用的架构类型，一个有趣的问题是，它是否会在表达性方面带来任何额外的成本。最后，第5节中讨论的方法在一个关键方面有所不同——它们是对新任务中的共享元参数进行微调和更新，还是保持共享元参数不变。最近，Chua等人[CLL21]表明，微调元参数在某些情况下可能是有益的，特别是当新任务的样本数量很大时。在gnn上的元学习环境中，理解这种微调何时有助于提高新任务的性能将是很有趣的。</p>
+<h3 id="7-4-应用程序"><a href="#7-4-应用程序" class="headerlink" title="7.4 应用程序"></a>7.4 应用程序</h3><p>在第6节中，我们已经讨论了一些使用gnn框架的元学习应用。这个通用框架与该领域的许多重要问题相当相关。</p>
+<p>网络对齐:元学习可能有用的一个潜在问题是网络对齐(NA) [zhou +20]。在NA中，主要目标是映射或链接来自不同网络的实体，现有的方法很难扩展。一个有趣的研究方向是考虑元学习来克服这种可扩展性的挑战。</p>
+<p>分子性质预测:gnn也被用于预测分子性质。然而，主要的挑战之一是，分子是异质结构，每个原子通过不同类型的键与不同的相邻原子连接。其次，通常只有有限的标记分子特性数据;因此，为了预测新的分子性质，元学习技术[Guo+21]可以是相关的和有效的。</p>
+<p>动态图:在许多应用中，图的出现伴随着其动态特性，也就是说，节点和边以及它们的属性可以随着时间的推移而改变(添加或删除)。上面讨论的大多数论文都使用了基于元学习和用于静态图的gnn的框架。一个有趣的方向是将该框架扩展为动态图。动态特性给新添加的节点或边缘带来了新的挑战，如难以获得标签。例如，在知识图中，新添加的边会引入新的关系。另一个挑战是效率，因为管理和预测不断变化的网络本身就是一项艰巨的任务。元学习将有助于解决这些挑战。</p>
+<h2 id="8-结论"><a href="#8-结论" class="headerlink" title="8  结论"></a>8  结论</h2><p>在这项调查中，我们对图神经网络(gnn)和元学习结合的工作进行了全面的回顾。除了概述gnn和元学习的背景外，我们还以有组织的方式在多个类别中组织了过去的研究。我们还提供了一个彻底的审查，方法的总结，和应用在这些类别。此外，我们还描述了几个利用GNN进行元学习的未来研究方向。元学习在gnn上的应用是一个不断发展和令人兴奋的领域，我们相信许多图问题将从这两种方法的结合中获益良多。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/mete-learning/">mete-learning</a><a class="post-meta__tags" href="/tags/GPN/">GPN</a></div><div class="post_share"><div class="social-share" data-image="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(13).jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/12/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%913/"><img class="prev-cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(77).jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Paper Translation|Multiple Wavelet Pooling for CNNs</div></div></a></div><div class="next-post pull-right"><a href="/2022/09/01/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%911/"><img class="next-cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(207).jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/09/01/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%911/" title="Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors"><img class="cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(207).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-01</div><div class="title">Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NTgxMC8zMjI3NQ"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (24).jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">方方土同学</div><div class="author-info__description">仅以此博客记录我的读研生活</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/PengJoy1106"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/PengJoy1106" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:110644319@gqq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">试着相信，试着在年轻的时候学会等待和忍耐</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Meta-Learining-With-Graph-Neural-Networks%EF%BC%9AMethods-and-Applications"><span class="toc-number">1.</span> <span class="toc-text">Meta-Learining With Graph Neural Networks：Methods and Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">1 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%88%91%E4%BB%AC%E7%9A%84%E8%B4%A1%E7%8C%AE"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.1 我们的贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.3.</span> <span class="toc-text">2 图神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%83%8C%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">3 元学习的背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A1%86%E6%9E%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1 框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%AD%E7%BB%83"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2 训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3 表示学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-number">1.4.4.</span> <span class="toc-text">理论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%85%B3%E4%BA%8E%E5%9B%BA%E5%AE%9A%E5%9B%BE%E7%9A%84%E5%85%83%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.5.</span> <span class="toc-text">4 关于固定图的元学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E8%8A%82%E7%82%B9%E5%B5%8C%E5%85%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1节点嵌入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2节点分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E9%93%BE%E6%8E%A5%E9%A2%84%E6%B5%8B"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3 链接预测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%85%83%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.6.</span> <span class="toc-text">5 图神经网络的元学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E8%8A%82%E7%82%B9-x2F-%E8%BE%B9%E7%BC%98%E7%BA%A7%E5%85%B1%E4%BA%AB%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.6.1.</span> <span class="toc-text">5.1节点&#x2F;边缘级共享表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%9B%BE%E7%BA%A7%E5%85%B1%E4%BA%AB%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.6.2.</span> <span class="toc-text">5.2 图级共享表示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.7.</span> <span class="toc-text">6 其他应用程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91"><span class="toc-number">1.8.</span> <span class="toc-text">7 未来的发展方向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%9B%BE%E4%B8%8A%E7%9A%84%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">1.8.1.</span> <span class="toc-text">7.1 图上的组合优化问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%9B%BE%E6%8C%96%E6%8E%98%E9%97%AE%E9%A2%98"><span class="toc-number">1.8.2.</span> <span class="toc-text">7.2 图挖掘问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E7%90%86%E8%AE%BA"><span class="toc-number">1.8.3.</span> <span class="toc-text">7.3 理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.8.4.</span> <span class="toc-text">7.4 应用程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%BB%93%E8%AE%BA"><span class="toc-number">1.9.</span> <span class="toc-text">8  结论</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB9/" title="Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes">Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes</a><time datetime="2022-09-26T12:37:00.000Z" title="发表于 2022-09-26 20:37:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB8/" title="Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection">Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection</a><time datetime="2022-09-26T12:26:00.000Z" title="发表于 2022-09-26 20:26:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB7/" title="Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection">Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection</a><time datetime="2022-09-26T02:39:00.000Z" title="发表于 2022-09-26 10:39:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/14/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%915/" title="Paper Translation|Object detection method for ship safety plans using deep">Paper Translation|Object detection method for ship safety plans using deep</a><time datetime="2022-09-14T02:28:00.000Z" title="发表于 2022-09-14 10:28:00">2022-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/13/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%914/" title="Paper Translation|Object detection method for ship safety plans using deep learning">Paper Translation|Object detection method for ship safety plans using deep learning</a><time datetime="2022-09-13T01:57:00.000Z" title="发表于 2022-09-13 09:57:00">2022-09-13</time></div></div></div></div></div></div></main><footer id="footer" style="background: flase"><div id="footer-wrap"><div class="copyright">&copy;2022 By 方方土同学</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><div><div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async src="/js/weather.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

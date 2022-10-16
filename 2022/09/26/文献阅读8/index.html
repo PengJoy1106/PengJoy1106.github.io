@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection | 方寸之土</title><meta name="keywords" content="surface object detection,target tracking"><meta name="author" content="方方土同学"><meta name="copyright" content="方方土同学"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="摘要提出了一种新的显著区域检测算法，用于在抖动视场中对海上船舶进行检测和识别。基于这种情况，本文采用的解决方法是分别检测每一帧的显著区域，而不是使用跟踪算法，显著区域检测基于局部和全局对比。结果表明，该方法能够有效地抑制干扰，准确地检测出目标的形状。证明本文算法是一种高效的船舶检测目标检测算法。 引言随着科学技术的出现，对人类视觉系统的研究表明，人类的视觉系统总是能够将注意力集中在最显著的物体上，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection">
+<meta property="og:url" content="http://pengjoy1106.github.io/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB8/index.html">
+<meta property="og:site_name" content="方寸之土">
+<meta property="og:description" content="摘要提出了一种新的显著区域检测算法，用于在抖动视场中对海上船舶进行检测和识别。基于这种情况，本文采用的解决方法是分别检测每一帧的显著区域，而不是使用跟踪算法，显著区域检测基于局部和全局对比。结果表明，该方法能够有效地抑制干扰，准确地检测出目标的形状。证明本文算法是一种高效的船舶检测目标检测算法。 引言随着科学技术的出现，对人类视觉系统的研究表明，人类的视觉系统总是能够将注意力集中在最显著的物体上，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(75).jpg">
+<meta property="article:published_time" content="2022-09-26T12:26:00.000Z">
+<meta property="article:modified_time" content="2022-10-16T12:21:34.639Z">
+<meta property="article:author" content="方方土同学">
+<meta property="article:tag" content="surface object detection">
+<meta property="article:tag" content="target tracking">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(75).jpg"><link rel="shortcut icon" href="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (8).jpg"><link rel="canonical" href="http://pengjoy1106.github.io/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":"ture","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-16 20:21:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><script src="/live2d-widget/autoload.js"></script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (24).jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-file-video"></i><span> 光影旅途</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">方寸之土</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-file-video"></i><span> 光影旅途</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="he-plugin-simple"></div></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-26T12:26:00.000Z" title="发表于 2022-09-26 20:26:00">2022-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-16T12:21:34.639Z" title="更新于 2022-10-16 20:21:34">2022-10-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>提出了一种新的显著区域检测算法，用于在抖动视场中对海上船舶进行检测和识别。基于这种情况，本文采用的解决方法是分别检测每一帧的显著区域，而不是使用跟踪算法，显著区域检测基于局部和全局对比。结果表明，该方法能够有效地抑制干扰，准确地检测出目标的形状。证明本文算法是一种高效的船舶检测目标检测算法。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着科学技术的出现，对人类视觉系统的研究表明，人类的视觉系统总是能够将注意力集中在最显著的物体上，这就是所谓的视觉选择性注意。有关区域就是所谓的突出对象。视觉注意机制可以帮助人们将注意力锁定在最突出的区域。该机制可以消除来自背景的干扰。借助显著性检测，机器视觉可以高效地完成图像分割[1-2]、目标识别[3]、目标检索[4]和目标跟踪。</p>
+<h1 id="显著性检测的主要方法"><a href="#显著性检测的主要方法" class="headerlink" title="显著性检测的主要方法"></a>显著性检测的主要方法</h1><p>在显著性检测领域，1998年，Itti[7]基于Treisman[5-6]的整合理论和Koch的生物学架构，提出了经典的视觉注意模型。所谓Itti模型在实际测量中得到了接近人类视觉感知的结果。2006年，Jonathan Hare在图论的基础上提出了GBVS[8]算法，它遵循Itti模型的结构。该结构包含三个步骤，分别是特征提取、中心周边竞争和重组。此外，本文还利用马尔可夫链计算了中心-周边竞争的相互作用。2007年，Hou和Zhang提出了基于自然图像[9]的傅里叶变换频谱分析的残差谱模型。这是第一个在频域上处理的显著性检测模型。2008年，Achanta提出了基于多尺度周边区域对比的交流算法[10]。2009年，Achanta提出了一种频率调谐算法[11]。通过不同高斯带通滤波器与均值的叠加得到全分辨率显著图。2013年，Imamoglu[12]提出了一种基于小波变换的底层特征显著性检测模型。该模型利用小波变换建立多尺度特征图进行局部检测。计算出的显著图可以突出突出区域，但分辨率较低。</p>
+<p>由于研究现状和针对海面目标的检测情况。本文提出了一种基于空间域局部检测与全局检测融合的快速显著性检测算法，以获得更好的海面检测情况下的检测效果。该算法还应具有较高的执行效率。</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="局部检测"><a href="#局部检测" class="headerlink" title="局部检测"></a>局部检测</h2><p>直观意义上的突出物是指它们不同于其周边地区所具有的某些特征。本文基于[10]理论，提取每个像素与其周围像素的差值。显然，当它小于过滤器大小时，对象将被完全检测到。另一方面，较小的过滤器尺寸只能部分检测到目标。较小的物体可以被较小的滤波器很好地检测到，也可以被所有的滤波器检测到。大的物体只能用大的滤波器来检测。因此，为了得到综合的结果，我们将最终显著图定义为三个显著图的加权平均值。</p>
+<p>[10]中的卷积核是一个均值滤波器的核，显著图中像素的值是周围像素的平均值。但是，这个内核有两个缺点。首先，当物体较大时，物体的中心区域像素都是显著的物体，并且彼此相似。他们的歧视是非常小的。它会在突出物体的中心形成一个“洞”。第二，在背景中物体的边界附近会有一个“晕”，因为物体的像素在计算时也包含在内核中。光晕在显著图中是一个虚假的显著区域。</p>
+<p>在[10]中，计算在Lab颜色空间中。事实上，在其他颜色空间中还有更多的特征。本文将图像转换为Lab颜色空间和HSV颜色空间。然后将图像分割成单个通道。将0到255的范围归一化，以观察每个通道的性能。通道如图2所示。</p>
+<p>在对大量的海面图像进行验证后，总结出以下结论。因为“a”代表红色和绿色之间的位置。在真实的海面场景中，大海、天空和船舶涂层的位置过于接近，难以区分。“b”空间表示黄色和蓝色之间的位置。然而，大海、天空的色调和船的涂层是近似蓝色的。在b空间的差异仍然很小。“H”空间代表色调。事实上，“a”和“b”空间的相似性相当于“H”空间的相似性。对于其他空间，“L”空间表示颜色的明度。“S”空间表示颜色的饱和度。“V”空间表示亮度。这三个空间的区别是明显的。因此，本文从这三个空间计算显著性映射。</p>
+<p>然后用式(2)中定义的卷积核对L、S、V通道进行滤波，根据实际情况，目标船舶的尺寸会相对较小。因此本文采用不同大小核的显著图的加权平均。由于目标尺寸相对较小，内核较小的显著图可以显示更多的细节，</p>
+<h2 id="全局检测"><a href="#全局检测" class="headerlink" title="全局检测"></a>全局检测</h2><p>相对于局部检测，基于心理学研究的全局检测。[13]推断，人类的感知系统对颜色、强度和纹理等视觉信号的对比非常敏感。在此基础上，提出了一种利用图像颜色统计量计算空间显著性图的有效方法。[13]中的算法的计算复杂度与图像像素的数量成线性关系。图像的显著性图是建立在图像像素之间的颜色对比之上的。算法定义为</p>
+<p>突出的物体与周围地区截然不同。但是在数值变化平缓的区域会有一个相对较高的显著区域，如图4所示。本文将全局显著图视为基于一定特征的单通道图像。通过局部检测的方法进行过滤。结果如图4所示。</p>
+<h2 id="局部检测与全局检测的融合"><a href="#局部检测与全局检测的融合" class="headerlink" title="局部检测与全局检测的融合"></a>局部检测与全局检测的融合</h2><p>[14]和[15]表明，神经网络或任何相关领域的研究都不能证明在颜色空间中存在线性依赖性。因此，本文不考虑色彩空间的相互作用。目前，大多数权重都是通过机器学习或经验来定义的。提出了一种具有特征独立性和特征连接性的特征融合方法。该方法保留了各特征间的独立性，提取了特征间的线性关系同时组合影响。</p>
+<p>在融合显著图后，显著区域应该是地图中最突出显示的区域。然而，背景中的一些区域也可能被突出显示，但不是很亮。压制背景区域，强调真正的突出区域。由于sigmoid函数可以模拟神经细胞的非线性脉冲，本文提出了一种利用sigmoid函数曲线的变体进行校正的曲线。</p>
+<h2 id="实验结果和分析"><a href="#实验结果和分析" class="headerlink" title="实验结果和分析"></a>实验结果和分析</h2><p>本文最后对几种代表性的显著性检测算法进行了对比实验。选择的方法有AC、FT、HC和LC。AC、HC、LC是基于空间域的。FT是基于频域的。AC为局部检测，其他为全局检测。它们易于实现，得到了广泛的应用。</p>
+<p>图10中的图像是通过不同算法得到的不同输入图像的显著性图，所有算法都是在c++中用OpenCV 2.4.10实现的。开发环境是Windows 7上的Visual Studio 2013。计算机的主频为3.20GHz，内存大小为8GB。</p>
+<p>如图6所示，本文在高速下比其他四种算法都能得到更好的显著性图。640×480分辨率图像的平均处理时间约为150ms。</p>
+<h2 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h2><p>为了得到目标(船)的方向，将从显著图中经过形态学处理提取出船的轮廓。考虑到不可能只有一个目标，需要对每个区域进行分析，计算方向。</p>
+<p>主成分分析是统计学中的一种降维方法，其目的是提取最显著的元素和结构。同时，还能减少噪声和冗余。更简单的结构将被揭示。实际上，它是通过线性分式变换将数据变换成一个新的坐标系。投影数据在第一个轴(第一个主成分)的方差最大，在另一个轴(第二个主成分)的方差第二大。</p>
+<p>对于目标区域内的像素点，PCA的目标是将维数从2降至1。计算出的一维将具有最大的方差(方向)。首先，求出矩阵X的协方差矩阵。X是一个零均值归一化矩阵[17]。C的特征向量对应于最大的特征值也就是第一主成分。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>提出了一种新的局部和全局显著性检测相结合的显著性检测算法。本文定义了一种新的卷积核，克服了原有卷积核的缺点。本文还对不同通道在Lab和HSV颜色空间中的性能进行了检验。根据每个信道的性能选择合适的信道和融合方法。最后，本文设计了一种新的融合方法，将局部和全局显著图融合在一起，突出重叠部分，抑制其他部分。同时，在不使用GPU的情况下，处理时间约为150ms, FPS可达7。该算法可以是一种基于多线程或GPU的海面检测实时检测跟踪算法。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/surface-object-detection/">surface object detection</a><a class="post-meta__tags" href="/tags/target-tracking/">target tracking</a></div><div class="post_share"><div class="social-share" data-image="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(75).jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB9/"><img class="prev-cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(23).jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes</div></div></a></div><div class="next-post pull-right"><a href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB7/"><img class="next-cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(14).jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB9/" title="Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes"><img class="cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(23).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-26</div><div class="title">Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes</div></div></a></div><div><a href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB7/" title="Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection"><img class="cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(14).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-26</div><div class="title">Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NTgxMC8zMjI3NQ"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (24).jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">方方土同学</div><div class="author-info__description">仅以此博客记录我的读研生活</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/PengJoy1106"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/PengJoy1106" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:110644319@gqq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">试着相信，试着在年轻的时候学会等待和忍耐</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E6%B5%8B%E7%9A%84%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">显著性检测的主要方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E6%A3%80%E6%B5%8B"><span class="toc-number">4.1.</span> <span class="toc-text">局部检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%A3%80%E6%B5%8B"><span class="toc-number">4.2.</span> <span class="toc-text">全局检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%85%A8%E5%B1%80%E6%A3%80%E6%B5%8B%E7%9A%84%E8%9E%8D%E5%90%88"><span class="toc-number">4.3.</span> <span class="toc-text">局部检测与全局检测的融合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%E5%92%8C%E5%88%86%E6%9E%90"><span class="toc-number">4.4.</span> <span class="toc-text">实验结果和分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="toc-number">4.5.</span> <span class="toc-text">主成分分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB9/" title="Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes">Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes</a><time datetime="2022-09-26T12:37:00.000Z" title="发表于 2022-09-26 20:37:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB8/" title="Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection">Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection</a><time datetime="2022-09-26T12:26:00.000Z" title="发表于 2022-09-26 20:26:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB7/" title="Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection">Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection</a><time datetime="2022-09-26T02:39:00.000Z" title="发表于 2022-09-26 10:39:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/14/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%915/" title="Paper Translation|Object detection method for ship safety plans using deep">Paper Translation|Object detection method for ship safety plans using deep</a><time datetime="2022-09-14T02:28:00.000Z" title="发表于 2022-09-14 10:28:00">2022-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/13/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%914/" title="Paper Translation|Object detection method for ship safety plans using deep learning">Paper Translation|Object detection method for ship safety plans using deep learning</a><time datetime="2022-09-13T01:57:00.000Z" title="发表于 2022-09-13 09:57:00">2022-09-13</time></div></div></div></div></div></div></main><footer id="footer" style="background: flase"><div id="footer-wrap"><div class="copyright">&copy;2022 By 方方土同学</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><div><div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async src="/js/weather.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

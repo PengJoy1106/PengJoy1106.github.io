@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors | 方寸之土</title><meta name="keywords" content="mete-learning,GPN"><meta name="author" content="方方土同学"><meta name="copyright" content="方方土同学"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks0 摘要如今，归因网络在众多影响深远的应用中无处不在，例如社会网络分析、财务欺诈检测和药物发现。节点分类作为分布式网络的核心分析任务，受到了学术界的广泛关注。在真实的带属性网络中，很大一部分节点类只包含有限的标记实例，呈现长尾节点类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors">
+<meta property="og:url" content="http://pengjoy1106.github.io/2022/09/01/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%911/index.html">
+<meta property="og:site_name" content="方寸之土">
+<meta property="og:description" content="Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks0 摘要如今，归因网络在众多影响深远的应用中无处不在，例如社会网络分析、财务欺诈检测和药物发现。节点分类作为分布式网络的核心分析任务，受到了学术界的广泛关注。在真实的带属性网络中，很大一部分节点类只包含有限的标记实例，呈现长尾节点类">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(207).jpg">
+<meta property="article:published_time" content="2022-09-01T13:27:00.000Z">
+<meta property="article:modified_time" content="2022-10-16T12:25:44.154Z">
+<meta property="article:author" content="方方土同学">
+<meta property="article:tag" content="mete-learning">
+<meta property="article:tag" content="GPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(207).jpg"><link rel="shortcut icon" href="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (8).jpg"><link rel="canonical" href="http://pengjoy1106.github.io/2022/09/01/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%911/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":"ture","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-16 20:25:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><script src="/live2d-widget/autoload.js"></script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (24).jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-file-video"></i><span> 光影旅途</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">方寸之土</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-file-video"></i><span> 光影旅途</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="he-plugin-simple"></div></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-01T13:27:00.000Z" title="发表于 2022-09-01 21:27:00">2022-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-16T12:25:44.154Z" title="更新于 2022-10-16 20:25:44">2022-10-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Paper Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks detectors"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Translation-Graph-Prototypical-Networks-for-Few-shot-Learning-on-Attributed-Networks"><a href="#Translation-Graph-Prototypical-Networks-for-Few-shot-Learning-on-Attributed-Networks" class="headerlink" title="Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks"></a>Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks</h1><h2 id="0-摘要"><a href="#0-摘要" class="headerlink" title="0 摘要"></a>0 摘要</h2><p>如今，归因网络在众多影响深远的应用中无处不在，例如社会网络分析、财务欺诈检测和药物发现。节点分类作为分布式网络的核心分析任务，受到了学术界的广泛关注。在真实的带属性网络中，很大一部分节点类只包含有限的标记实例，呈现长尾节点类分布。现有的节点分类算法无法处理镜头较少的节点类。作为一种补救措施，“少拍学习”在研究界引起了极大的关注。然而，少镜头节点分类仍然是一个具有挑战性的问题，我们需要解决以下问题:</p>
+<p>(i) 如何从一个属性网络中提取元知识用于少镜头节点分类?<br>(ii) 如何确定每个标签实例的信息量，以建立稳健有效的模型?</p>
+<p>为了回答这些问题，本文提出了一种图元学习框架——图原型网络(GPN)。通过构建半监督节点分类任务池来模拟真实的测试环境，GPN能够在一个有属性的网络上进行元学习，并衍生出一个高度可推广的模型来处理目标分类任务。大量实验证明了GPN在少镜头节点分类方面的优越性。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>由于其强大的建模能力，属性网络越来越多地被用于建模无数基于图的系统，如社交媒体网络、引用网络和基因调控网络。在属性网络的各种分析任务中，节点分类是一项必不可少的任务，它的应用范围很广，包括社交圈学习、文档分类和蛋白质分类等。简单地说，目标是在给定部分标记属性网络的情况下推断节点的缺失标签。为了解决这个问题，许多方法已经在研究界提出，并显示出有前景的性能。</p>
+<p>解决节点分类问题的主流方法通常遵循监督或半监督范式，这种范式通常依赖于所有节点类都有足够的标记节点。尽管如此，在许多真实世界的带属性网络工作中，很大一部分节点类只包含有限数量的标记实例，呈现了节点类标签的长尾分布。如图1所示，DBLP是一个数据集，其中节点表示出版物，节点标签表示场所。在所有节点类中，超过30%的节点类的标记实例少于10个。同时，许多实际应用都要求学习模型具有处理此类小概率类的能力。一个典型的例子是流量网络上的入侵检测问题，对手不断开发新的攻击和威胁。由于密集的标记成本，对于特定类型的攻击，只能访问少数示例。因此，通过有限的标记数据来理解这些攻击类型对于提供有效的反制措施至关重要。由于缺乏标记训练数据，现有的节点分类算法无法利用这些节点类学习出有效的模型。因此，研究在少镜头设置下的有属性网络上的节点分类问题是具有挑战性和必要性的。</p>
+<p>近年来，在利用少量标记例子来解决分类等任务的少镜头学习(FSL)方面取得了很大的研究进展。一般来说，一个FSL模型在不同的元训练任务中进行学习，这些任务从具有大量标记数据的类中采样，并且可以自然地从训练中看不到的类中泛化到一个新任务(即元测试任务)。这样的元学习过程使模型能够从以前的经验中适应知识，并导致了在FSL问题上的重大进展。具体来说，一些主要的研究(如连体网络、匹配网络和关系网络)试图通过比较共享度量空间中的查询实例和标记示例来进行预测。这些学习比较的方法由于其简单和有效而流行起来。</p>
+<p>尽管它们取得了丰硕的成功，但在归属网络上的少shot学习在很大程度上仍未得到探索，主要是因为以下两个挑战:</p>
+<p>(i)构建这些元训练任务的过程依赖于数据独立和同分布(i.i.d)的假设，这在归属网络上是无效的。除了传统的文本或图像数据外，属性网络位于非欧几里得空间，对节点之间的内在依赖关系进行编码。直接嫁接现有方法无法捕获底层数据结构，这使得嵌入的节点表示缺乏表现力。因此，如何在属性网络上发挥元学习的力量，从数据中提取元知识是必不可少的;<br>(ii)大多数现有的FSL方法简单地假设所有标记的例子在描述它们所属的类时都具有同等的重要性。然而，忽略标记节点的个体信息将不可避免地限制模型在现实世界的属性网络上的性能:一方面，由于标记数据严重受限，这使得FSL模型非常容易受到噪声或异常值的影响[33,45];另一方面，这与一个节点的重要性可能在很大程度上偏离另一个节点的事实相反。直观上，社区中的那些中心(核心)节点应该更具有代表性的[46]。因此，如何获取每个标记节点的信息量是在有属性网络上建立有效的少镜头分类模型的另一个挑战。</p>
+<p>为了解决上述挑战，我们提出了图原型网络(GPN)，这是一个图元学习框架，用于解决属性网络上的少镜头节点分类问题。与其直接对节点进行分类，GPN试图学习一个可转移的度量空间，通过寻找最近的类原型来预测节点的标签。该框架由两个基本组件组成，它们无缝地一起学习每个类的原型表示。具体而言，GPN中的网络编码器首先通过图神经网络(GNNs)将输入网络压缩为表达节点表示，以捕获属性网络的数据异构性。同时，开发了另一个基于gnn的节点评估器，通过利用网络中编码的额外信息来估计每个标记实例的信息量。通过这种方式，GPN获得了高鲁棒性和代表性的类原型。此外，通过跨半监督节点分类任务池进行元学习，GPN在一个有属性网络上逐步提取元知识，进一步在目标少镜头分类任务上获得更好的泛化能力。综上所述，我们工作的主要贡献如下:</p>
+<ul>
+<li><p>问题: 我们研究了具有属性网络上的少镜头节点分类的新问题。特别地，我们强调它在实际应用中的重要性，并进一步提供正式的问题定义。</p>
+</li>
+<li><p>算法: 针对该问题，我们提出了一个原则性框架GPN，它利用图神经网络和元学习在属性网络上学习一个强大的少镜头节点分类模型。</p>
+</li>
+<li><p>评估: 我们在各种真实世界的数据集上进行了广泛的实验，以证实我们的方法的有效性。实验结果表明，GPN在具有属性的网络中具有较好的少镜头节点分类性能。</p>
+</li>
+</ul>
+<h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2 相关工作"></a>2 相关工作</h2><p>在本节中，我们将相关工作简要总结为两类:<br>(1)图神经网络;<br>(2)少镜头学习。</p>
+<h3 id="2-1图神经网络"><a href="#2-1图神经网络" class="headerlink" title="2.1图神经网络"></a>2.1图神经网络</h3><p>在深度学习取得巨大成功的推动下，近年来，人们开始致力于开发用于图结构数据的深度神经网络。作为先行者的工作之一，GNN通过循环神经结构传播邻居的信息来学习节点表示。基于图谱理论，出现了一系列图卷积网络(GCNs)，通过设计不同的图卷积层展现了优越的学习性能。其中，对GCNs的第一个突出研究叫做谱CNN，它将卷积运算扩展到谱域用于网络表示学习。此后，随着图卷积网络的扩展，其研究取得了越来越多的进展。除了谱图卷积模型，遵循邻域聚合方案的图神经网络也被广泛研究。这些方法不是为每个节点训练单独的嵌入，而是学习一组聚合器函数，从节点的局部邻域聚合特征。GraphSAGE学习了一个通过从节点的局部邻域采样和聚合特征来生成嵌入的函数。类似地，GATs (Graph Attention Networks)在聚合节点的邻域信息时，引入了可训练的注意权值来指定对邻居的细粒度权值。此外，图同构网络(GIN)在多集上使用任意的聚合函数扩展了这一思想，并被证明与Weisfeiler-Lehman (WL)图同构检验一样具有强大的理论能力。然而，现有的GNN模型都侧重于半监督节点分类。当前gnn的主要挑战之一是无法处理具有严重有限样本的不可见类。在本文中，我们提出了一种新的GNN框架来解决图结构数据上的少镜头节点分类问题。</p>
+<h3 id="2-2-Few-shot学习"><a href="#2-2-Few-shot学习" class="headerlink" title="2.2 Few-shot学习"></a>2.2 Few-shot学习</h3><p>少镜头学习(FSL)的目的是基于从以往经验中获得的知识，用有限数量的例子解决新的任务。现有的FSL模型一般分为两大类:(1)基于优化的方法，主要是在给定梯度的少数镜头实例上学习模型参数的优化。一个例子是基于LSTM的元学习器，它旨在学习用于训练神经分类器的有效参数更新规则。mml学习适合不同FSL任务的参数初始化，并兼容任何使用梯度下降训练的模型。Meta-SGD在元学习方面做了进一步的改进，主张在一个步骤内学习权重初始化、梯度更新方向和学习率。蜗牛模型是另一种结合时间卷积和软注意来学习最优学习策略的模型。但是，这一行的工作通常会受到微调的计算成本的影响。(2)基于指标的方法，试图学习跨不同任务的查询和支持集之间的通用匹配指标。例如，匹配网络学习带有注意网络的加权最近邻分类器。prototype Network通过取支持实例的均值向量来计算每个类的原型，通过计算查询实例的欧氏距离来分类。Ren等人提出了一种原型网络的扩展，在少镜头学习中同时考虑了标记数据和未标记数据。关系网络训练一个辅助网络来学习每个查询和支持集之间的非线性度量。值得一提的是，由于简单和有效，我们的方法也遵循这个范例。近年来，图上的少镜头学习受到了越来越多的研究关注。然而，这些方法平等地对待支持例子，使模型不稳定的噪声或异常值。在本文中，我们学习了一个鲁棒和强大的少镜头学习模型，通过考虑标签支持例子的个体重要性。</p>
+<h2 id="3-问题陈述"><a href="#3-问题陈述" class="headerlink" title="3 问题陈述"></a>3 问题陈述</h2><p>遵循常用的表示法，在本文中，我们使用书法字体、粗体小写字母和粗体大写字母来表示集合(如G)、向量(如G)。， x)和矩阵(例如，x)。矩阵X的𝑖𝑡ℎ行用X𝑖表示，矩阵X的转置用XT表示。我们在表1中总结了整篇论文中使用的主要符号。对于其他特殊的符号，我们将在相应的部分中说明它们。</p>
+<p>形式上，一个带属性的网络可以表示为𝐺&#x3D; (V, E, X)，其中V表示节点集{𝑣1，𝑣2，…，𝑣𝑛}和E表示边集{𝑒1，𝑒2，…,𝑒𝑚}。每个节点关联一个特征向量x𝑖∈R1×𝑑，x &#x3D; [x1;x2;。； x𝑛)∈R𝑛×𝑑</p>
+<p>表示所有节点特性。因此，更一般地，有属性的网络可以表示为𝐺&#x3D; (A, X)，其中A &#x3D;{0,1}𝑛×𝑛是一个表示网络结构的邻接矩阵。其中，A𝑖，𝑗&#x3D; 1表示节点𝑣𝑖和节点𝑣𝑗之间有一条边;否则，A𝑖，𝑗&#x3D; 0。研究问题可以写成:</p>
+<p>问题定义1。带属性网络上的少镜头节点分类:给定一个带属性网络G &#x3D; {A, X}，假设我们有大量的带标签的节点，用于一组节点类𝐶𝑡𝑟𝑎𝑖𝑛。在对𝐶𝑡𝑟𝑎𝑖𝑛中的标记数据进行训练后，该模型的任务是预测节点(即查询集Q)的标签，这些节点来自一个不相连的节点类集𝐶𝑡𝑒𝑠𝑡，每个类中只有少数标记节点(即支持集S)可用。</p>
+<p>按照FSL中的常见设置，如果𝐶𝑡𝑒𝑠𝑡包含𝑁类，并且支持集S包含每个类𝐾标记的节点，这个问题就被命名为𝑁-way𝐾-shot节点分类问题。本质上，这个问题的目标是学习一个元分类器，它可以适应只有几个标记节点的新类。因此，如何从𝐶𝑡𝑟𝑎𝑖𝑛中提取可转移的元知识是解决研究问题的关键。</p>
+<h2 id="4-图原型网络"><a href="#4-图原型网络" class="headerlink" title="4 图原型网络"></a>4 图原型网络</h2><p>由于现有的FSL模型并不是为图结构数据量身定制的，因此直接应用于研究问题是不可行的。在本节中，我们详细介绍了在有属性网络上用于少镜头节点分类的图原型网络(GPN)。具体来说，我们的框架设计和构建是为了解决三个具有挑战性的研究问题:</p>
+<ul>
+<li><p>如何在有属性的网络(非i.i.d。数据)提取元知识?</p>
+</li>
+<li><p>如何通过考虑节点属性和拓扑结构，从输入属性网络中学习表达节点表示?</p>
+</li>
+<li><p>如何识别每个标记节点的信息，以学习稳健和鉴别类表示?</p>
+</li>
+</ul>
+<p>图2概述了提出的图原型网络(GPN)。在4.1节中，我们介绍了所提模型的骨干培训机制。在4.2节和4.3节中，我们介绍了如何设计GPN中的两个基本模块。然后我们讨论如何使用第4.4节中提出的框架进行少镜头节点分类。最后，我们将在4.5节中介绍复杂性分析。</p>
+<h3 id="4-1-基于归属网络的情景训练"><a href="#4-1-基于归属网络的情景训练" class="headerlink" title="4.1 基于归属网络的情景训练"></a>4.1 基于归属网络的情景训练</h3><p>我们的方法是一个元学习框架，遵循流行的情景训练范式。具体来说，GPN在不同的元训练任务中进行大量的学习，而不是只在目标元测试任务中学习。情景训练的关键思想是通过从𝐶𝑡𝑟𝑎𝑖𝑛采样节点来模拟真实的测试环境。训练环境与测试环境的一致性缓解了分布差距，提高了模型的泛化能力。具体来说，在每一集中，我们构建一个𝑁-way𝐾-shot元训练任务:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831211754.png"></p>
+<p>其中元训练任务T𝑡的支持集S𝑡和查询集Q𝑡都从𝐶𝑡𝑟𝑎𝑖𝑛采样。支持集S𝑡包含每个类的𝐾节点，而查询集Q𝑡包含从每个𝑁类的剩余部分采样的𝑀查询节点。</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831211912.png"></p>
+<p>整个训练过程基于一组𝑇元训练任务T𝑡𝑟𝑎𝑖𝑛&#x3D; {T𝑡}𝑡&#x3D;1。在每个元训练任务T𝑡中，该模型被训练以最小化其对查询集Q𝑡的预测的损失，并逐集进行训练，直到收敛。通过这种方式，模型逐渐通过那些元训练任务收集元知识，然后可以自然地泛化到元测试任务T𝑡𝑒𝑠𝑡&#x3D; {S, Q}，其中包含不可见的类𝐶𝑡𝑒𝑠𝑡。</p>
+<p>与构建监督元训练任务池[12]的传统情景训练不同，在每个情景中，我们采样𝑁-way𝐾-shot标记节点，并将其余节点屏蔽为未标记节点。这样，我们就可以用部分标记的属性网络创建一个半监督元训练任务。通过同时考虑标记数据和未标记数据及其依赖关系，我们能够在元学习过程中学习更有表现力的节点表示，用于少镜头节点分类。</p>
+<h3 id="4-2-网络表示学习"><a href="#4-2-网络表示学习" class="headerlink" title="4.2 网络表示学习"></a>4.2 网络表示学习</h3><p>为了从一个有属性的网络中学习表达节点表示，我们开发了一个网络编码器来捕捉数据的异构性。具体来说，网络编码器拥有一个GNN主干，它将每个节点转换为一个低维潜在表示。一般情况下，gnn采用邻域聚合方案，通过递归聚合和压缩本地邻域的节点特征来计算节点表示。简单地说，GNN层可以定义为:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831212101.png"></p>
+<p>式中h𝑙𝑖为𝑙层节点𝑖的节点表示，N𝑖为𝑣𝑖相邻节点的集合。Combine和Aggregate是gnn的两个关键功能，有一系列可能的实现方法[15,17,39]。</p>
+<p>通过在网络编码器中叠加多个GNN层，学习到的节点表示能够捕获网络中远程节点依赖关系:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831212201.png"></p>
+<p>其中Z为从网络编码器学习到的节点表示。为简单起见，我们将使用𝑓𝜽(·)用𝐿GNN层表示网络编码器。</p>
+<p>模型计算。有了从网络编码器学习到的节点表示，接下来，我们的目标是用支持集中的标记节点计算每个类的表示。我们遵循原型网络[35]的思想，它鼓励每个类集群的节点围绕一个特定的原型表示。形式上，类原型可以通过以下方式计算:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831212258.png"></p>
+<p>其中S𝑐表示𝑐类的标记样例集，Proto为原型计算函数。例如，在vanilla Prototypical Networks[35]中，每个类的原型是通过取属于该类的所有嵌入节点的平均值来计算的:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831212351.png"></p>
+<h3 id="4-3-节点重要性评估"><a href="#4-3-节点重要性评估" class="headerlink" title="4.3 节点重要性评估"></a>4.3 节点重要性评估</h3><p>尽管它很简单，但直接将嵌入支持实例的平均向量作为原型可能不会为我们的问题提供有希望的结果。它不仅忽略了网络中每个节点的重要程度不同，而且由于标记数据[45]严重受限，使得FSL模型对噪声非常敏感。因此，细化这些类原型对于构建健壮而有效的FSL模型变得尤为重要。</p>
+<p>为了识别每个标记节点的信息量，我们认为节点的重要性与其邻居的重要性[27]是高度相关的。据此，我们设计了一个基于gnn的节点评估器𝑔𝜙(·)(如图3所示)，通过分数聚合层估计节点重要性分数，其定义如下:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831212628.png"></p>
+<p>其中𝑠𝑙𝑖为𝑙-th层节点𝑣𝑖的重要性得分(𝑙&#x3D;1，…𝐿); 是节点𝑣𝑖和𝑣𝑗之间的关注权重，我们通过共享关注机制计算:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831212903.png"></p>
+<p>其中||为串联算子，a为权值向量。为了计算初始重要性评分𝑠0，我们使用评分层来压缩节点特征。我们的计分层是一个具有tanh非线性的前馈层。其中，节点𝑣𝑖的初始得分计算方法为:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831213032.png"></p>
+<p>其中w𝑠∈R𝑑是可学习的权重向量，𝑏𝑠∈R1是偏差。中心的调整。在之前关于节点重要性估计的研究中[26,27]认为，节点的重要性与其在图中的中心性呈正相关。考虑到节点𝑣𝑖的度度deg(𝑖)是其中心性和受欢迎程度的常用代理，我们定义节点𝑣𝑖的初始中心性𝐶(𝑖)为:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831213123.png"></p>
+<p>其中𝜖是一个小常数。为了计算最终的重要性得分，我们对最后一层的估计得分𝑠𝐿应用中心性调整，并应用一个sigmoid非线性，如下所示:</p>
+<p><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/20220831213236.png"></p>
+<p>通过这种方式，节点赋值器通过利用网络中编码的附加信息来调整支持集中标记示例的重要性。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/mete-learning/">mete-learning</a><a class="post-meta__tags" href="/tags/GPN/">GPN</a></div><div class="post_share"><div class="social-share" data-image="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(207).jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/03/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%912/"><img class="prev-cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(13).jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/10/%E8%8A%B1%E6%9D%9F%E8%88%AC%E7%9A%84%E6%81%8B%E7%88%B1/"><img class="next-cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(21).jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">光影旅途|花束般的恋爱</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/09/03/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%912/" title="Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors"><img class="cover" src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/(13).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-03</div><div class="title">Paper Translation|Meta-Learining With Graph Neural Networks：Methods and Applications detectors</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NTgxMC8zMjI3NQ"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://blog-1310087999.cos.ap-nanjing.myqcloud.com/kakarotto (24).jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">方方土同学</div><div class="author-info__description">仅以此博客记录我的读研生活</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/PengJoy1106"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/PengJoy1106" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:110644319@gqq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">试着相信，试着在年轻的时候学会等待和忍耐</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Translation-Graph-Prototypical-Networks-for-Few-shot-Learning-on-Attributed-Networks"><span class="toc-number">1.</span> <span class="toc-text">Translation|Graph Prototypical Networks for Few-shot Learning on Attributed Networks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">0 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">1 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text">2 相关工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1图神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Few-shot%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2 Few-shot学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%97%AE%E9%A2%98%E9%99%88%E8%BF%B0"><span class="toc-number">1.4.</span> <span class="toc-text">3 问题陈述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9B%BE%E5%8E%9F%E5%9E%8B%E7%BD%91%E7%BB%9C"><span class="toc-number">1.5.</span> <span class="toc-text">4 图原型网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%9F%BA%E4%BA%8E%E5%BD%92%E5%B1%9E%E7%BD%91%E7%BB%9C%E7%9A%84%E6%83%85%E6%99%AF%E8%AE%AD%E7%BB%83"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1 基于归属网络的情景训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%BD%91%E7%BB%9C%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2 网络表示学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%8A%82%E7%82%B9%E9%87%8D%E8%A6%81%E6%80%A7%E8%AF%84%E4%BC%B0"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3 节点重要性评估</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB9/" title="Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes">Paper Reading 8|Sea surface target detection based on complex ARMA-GARCH processes</a><time datetime="2022-09-26T12:37:00.000Z" title="发表于 2022-09-26 20:37:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB8/" title="Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection">Paper Reading 8|Sea surface target detection and recognition algorithm based on local and global salient region detection</a><time datetime="2022-09-26T12:26:00.000Z" title="发表于 2022-09-26 20:26:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/26/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB7/" title="Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection">Paper Reading 7|An Image-Based Benchmark Dataset and a Novel Object Detector for Water Surface Object Detection</a><time datetime="2022-09-26T02:39:00.000Z" title="发表于 2022-09-26 10:39:00">2022-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/14/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%915/" title="Paper Translation|Object detection method for ship safety plans using deep">Paper Translation|Object detection method for ship safety plans using deep</a><time datetime="2022-09-14T02:28:00.000Z" title="发表于 2022-09-14 10:28:00">2022-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/13/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%914/" title="Paper Translation|Object detection method for ship safety plans using deep learning">Paper Translation|Object detection method for ship safety plans using deep learning</a><time datetime="2022-09-13T01:57:00.000Z" title="发表于 2022-09-13 09:57:00">2022-09-13</time></div></div></div></div></div></div></main><footer id="footer" style="background: flase"><div id="footer-wrap"><div class="copyright">&copy;2022 By 方方土同学</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><div><div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async src="/js/weather.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
