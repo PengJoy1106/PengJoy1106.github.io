@@ -79,7 +79,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
+  font-family: "Noto Serif SC";
   font-size: 100%;
   line-height: 1.15;
   margin: 0
@@ -222,7 +222,7 @@ hr:before,
 .note:not(.no-icon)::before {
   display: inline-block;
   font-weight: 600;
-  font-family: 'Font Awesome 6 Free';
+  font-family: "Noto Serif SC";
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
 }
@@ -233,7 +233,7 @@ hr:before,
 #aside-content .card-widget,
 .layout > .recent-posts .pagination > *:not(.space) {
   border-radius: 8px;
-  background: var(--card-bg);
+  background: #ffffff00;
   -webkit-box-shadow: var(--card-box-shadow);
   box-shadow: var(--card-box-shadow);
   -webkit-transition: all 0.3s;
@@ -1339,7 +1339,7 @@ canvas:not(#ribbon-canvas),
 :root {
   --global-font-size: 14px;
   --global-bg: #fff;
-  --font-color: #4c4948;
+  --font-color: #000000;
   --hr-border: #d2ebfd;
   --hr-before-color: #bfe4fb;
   --search-bg: #f6f8fa;
@@ -1379,7 +1379,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: Candyhome, sans-serif;
+  font-family: "Noto Serif SC";
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1512,7 +1512,10 @@ a:hover {
 #site-name,
 #aside-content .author-info__name,
 #aside-content .author-info__description {
-  font-family: Candyhome,Titillium Web, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft JhengHei', 'Microsoft YaHei', sans-serif;
+  font-family: FZShouJinShu-S10S;
+  font-weight: 1000;
+  font-style: normal;
+
 }
 .is-center {
   text-align: center;
@@ -1680,7 +1683,7 @@ figure.highlight pre .javascript .function {
 #article-container pre,
 #article-container code {
   font-size: var(--global-font-size);
-  font-family: Candyhome,consolas, Menlo, 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  font-family: "Noto Serif SC" !important;
 }
 #article-container code {
   padding: 2px 4px;
@@ -1951,7 +1954,7 @@ figure.highlight pre .javascript .function {
   height: 100%;
   vertical-align: top;
   text-align: center;
-  font-family: Candyhome,Titillium Web, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft JhengHei', 'Microsoft YaHei', sans-serif;
+  font-family: "Noto Serif SC";
 }
 @media screen and (max-width: 768px) {
   .error404 #error-wrap .error-content .error-info {
