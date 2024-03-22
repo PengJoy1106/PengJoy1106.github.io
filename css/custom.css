@@ -1,0 +1,9 @@
+@font-face{
+    font-family:'Candyhome' ;  /* 字体名自定义即可 */
+    src:url('https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap') ; /* 字体文件路径 */
+    font-display : swap;
+}
+
+body {
+    font-family: 'Candyhome', sans-serif;
+}
